@@ -1,0 +1,17 @@
+
+/** ------------------------------------------------------
+ * THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+ * -------------------------------------------------------
+ */
+
+/* tslint:disable */
+/* eslint-disable */
+export interface FileInput {
+    file: Upload;
+}
+
+export interface IMutation {
+    updateProfilePicture(data?: FileInput): string | Promise<string>;
+}
+
+export type Upload = any;

@@ -1,0 +1,18 @@
+scalar Upload
+
+type Message {
+  message: String
+  status: Int
+}
+
+input FileInput {
+  file: Upload!
+}
+
+type Mutation {
+  updateProfilePicture(data: FileInput): String
+}
+
+type Query {
+  message: Message
+}
