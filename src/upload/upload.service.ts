@@ -14,7 +14,7 @@ export class UploadService {
 	async updateProfilePicture(props: any) {
 		const { createReadStream } = await props.file;
 		const upload = await this.uploadStream(
-			await createReadStream(),
+			createReadStream(),
 		);
 	}
 
