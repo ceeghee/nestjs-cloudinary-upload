@@ -28,11 +28,11 @@ export class UploadService {
 						throw new BadRequestException('Unable to upload image, try again');
 					}
 					if (img) {
-						console.log('uploaded image : ', img)
+						console.log('uploaded image : ', img.secure_url)
 					}
 				},
 			);
-			await stream.pipe(streamLoad);
+			return await stream.pipe(streamLoad);
 		} catch (error) {
 			console.log(error);
 
