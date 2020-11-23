@@ -13,8 +13,6 @@ export class UploadResolver {
 	async updateProfilePicture(
 		@Args('data', { type: () => GraphQLUpload }) stream: any,
 	) {
-		console.log(stream);
-
 		return this.uploadService.updateProfilePicture(stream);
 	}
 }

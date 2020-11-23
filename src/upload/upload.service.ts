@@ -14,7 +14,7 @@ export class UploadService {
 	async updateProfilePicture(props: any) {
 		const { createReadStream } = await props.file;
 		const upload = await this.uploadStream(
-			createReadStream(),
+			await createReadStream(),
 		);
 	}
 
@@ -22,7 +22,7 @@ export class UploadService {
 		try {
 			const streamLoad = v2.uploader.upload_stream(
 				{ tags: 'haggleX_user_img' },
-				async (err, img) => {
+				(err, img) => {
 					if (err) {
 						console.log(err);
 						throw new BadRequestException('Unable to upload image, try again');
@@ -32,7 +32,7 @@ export class UploadService {
 					}
 				},
 			);
-			return await stream.pipe(streamLoad);
+			await stream.pipe(streamLoad);
 		} catch (error) {
 			console.log(error);
 
