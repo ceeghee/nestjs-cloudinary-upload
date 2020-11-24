@@ -46,7 +46,7 @@ export class UploadService {
 		);
 		console.log('stream load : ', streamLoad);
 
-		createReadStream().pipe(streamLoad);
+		await createReadStream().pipe(streamLoad);
 		return 'holla'
 		// } catch (error) {
 		// 	console.log(error);
