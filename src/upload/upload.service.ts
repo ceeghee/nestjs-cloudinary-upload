@@ -21,7 +21,7 @@ export class UploadService {
 	async uploadStream(stream: any): Promise<any> {
 		try {
 			const streamLoad = v2.uploader.upload_stream(
-				{ tags: 'haggleX_user_img' },
+				{ timeout: 60000 },
 				(err, img) => {
 					if (err) {
 						console.log(err);
@@ -32,7 +32,7 @@ export class UploadService {
 					}
 				},
 			);
-			return await stream.pipe(streamLoad);
+			await stream.pipe(streamLoad);
 		} catch (error) {
 			console.log(error);
 
