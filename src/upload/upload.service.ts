@@ -24,31 +24,34 @@ export class UploadService {
 	}
 	async updateProfilePicture(props: any) {
 		const { createReadStream } = await props.file;
-		// const upload = await this.uploadStream(
+		// const upload = await this.uploadStream( 
 		// 	{ createReadStream }
 		// );
 
-		try {
-			const streamLoad = v2.uploader.upload_stream(
-				{ tags: 'haggleX_user_img' },
-				function (error, result) {
-					console.log(error, result);
-				}
-				// (err, img) => {
-				// 	if (err) {
-				// 		console.log(err);
-				// 		throw new BadRequestException('Unable to upload image, try again');
-				// 	}
-				// 	if (img) {
-				// 		console.log('uploaded image : ', img.secure_url)
-				// 	}
-				// },
-			);
-			createReadStream().pipe(streamLoad);
-		} catch (error) {
-			console.log(error);
-			throw new BadGatewayException('error occured, please try again');
-		}
+		// try {
+		const streamLoad = v2.uploader.upload_stream(
+			{ tags: 'haggleX_user_img' },
+			function (error, result) {
+				console.log(error, result);
+			}
+			// (err, img) => {
+			// 	if (err) {
+			// 		console.log(err);
+			// 		throw new BadRequestException('Unable to upload image, try again');
+			// 	}
+			// 	if (img) {
+			// 		console.log('uploaded image : ', img.secure_url)
+			// 	}
+			// },
+		);
+		console.log('stream load : ', streamLoad);
+
+		createReadStream().pipe(streamLoad);
+		return 'holla'
+		// } catch (error) {
+		// 	console.log(error);
+		// 	throw new BadGatewayException('error occured, please try again');
+		// }
 	}
 
 	async uploadStream(stream: any): Promise<any> {
