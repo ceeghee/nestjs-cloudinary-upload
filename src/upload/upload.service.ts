@@ -33,7 +33,6 @@ export class UploadService {
 				{ tags: 'haggleX_user_img' },
 				function (error, result) {
 					console.log(error, result);
-
 				}
 				// (err, img) => {
 				// 	if (err) {
@@ -48,7 +47,6 @@ export class UploadService {
 			createReadStream().pipe(streamLoad);
 		} catch (error) {
 			console.log(error);
-
 			throw new BadGatewayException('error occured, please try again');
 		}
 	}
