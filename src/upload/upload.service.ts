@@ -21,16 +21,19 @@ export class UploadService {
 	async uploadStream(stream: any): Promise<any> {
 		try {
 			const streamLoad = v2.uploader.upload_stream(
-				{ tags: 'haggleX_user_img' },
-				(err, img) => {
-					if (err) {
-						console.log(err);
-						throw new BadRequestException('Unable to upload image, try again');
-					}
-					if (img) {
-						console.log('uploaded image : ', img.secure_url)
-					}
-				},
+				{ timeout: 60000 },
+				function (error, result) {
+					console.log(error, result);
+				}
+				// (err, img) => {
+				// 	if (err) {
+				// 		console.log(err);
+				// 		throw new BadRequestException('Unable to upload image, try again');
+				// 	}
+				// 	if (img) {
+				// 		console.log('uploaded image : ', img.secure_url)
+				// 	}
+				// },
 			);
 			await stream.pipe(streamLoad);
 		} catch (error) {

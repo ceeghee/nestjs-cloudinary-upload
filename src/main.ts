@@ -10,7 +10,9 @@ const corsOptionss = {
 async function bootstrap() {
 	const app = await NestFactory.create(AppModule);
 	app.enableCors(corsOptionss)
-	const port: number = parseInt(process.env.PORT, 10) || 3000;
+	const port: number = parseInt(process.env.PORT, 10) || 5000;
+	console.log('App listening on port : ', port);
+
 	await app.listen(port);
 }
 bootstrap();
