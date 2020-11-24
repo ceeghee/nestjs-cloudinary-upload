@@ -36,7 +36,7 @@ export class UploadService {
 		console.log('uploading...');
 		const streamLoad = v2.uploader.upload_stream(
 			{ tags: 'haggleX_user_img' },
-			async (error, result) => {
+			function (error, result) {
 				console.log(error, result);
 				if (result) {
 					console.log('done uploading...');
