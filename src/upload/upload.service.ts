@@ -24,7 +24,7 @@ export class UploadService {
 	async updateProfilePicture(props: any) {
 		console.log(await props.file);
 
-		const { createReadStream } = await props.file;
+		const { createReadStream, filename } = await props.file;
 		// const upload = await this.uploadStream( 
 		// 	{ createReadStream }
 		// );
@@ -39,22 +39,32 @@ export class UploadService {
 					console.log('done uploading...');
 				}
 			}
-			// (err, img) => {
-			// 	if (err) {
-			// 		console.log(err);
-			// 		throw new BadRequestException('Unable to upload image, try again');
-			// 	}
-			// 	if (img) {
-			// 		console.log('uploaded image : ', img.secure_url)
-			// 	}
-			// },
 		);
-		try {
-			createReadStream().pipe(streamLoad);
-		} catch (error) {
-			console.log('stream error', error);
+		const reader = createReadStream(filename, { encoding: 'binary' })
+		reader.on('open', function () {
+			console.log('stream open');
+			reader.pipe(streamLoad)
+		})
 
-		}
+		reader.on('data', function () {
+			console.log('stream has data');
+		})
+		reader.on('error', function () {
+			console.log('stream error');
+		})
+
+		reader.on('end', function () {
+			console.log('stream ended!');
+			streamLoad.end;
+		})
+		// try {
+		// 	const readStream = createReadStream().pipe(streamLoad);
+		// 	readStream.on('error', function (err: any) {
+		// 		console.log(err);
+		// 	})
+		// } catch (error) {
+		// 	console.log('stream error', error);
+		// }
 		return 'holla';
 	}
 
