@@ -1,6 +1,5 @@
 import { BadGatewayException, BadRequestException, Injectable } from '@nestjs/common';
 import { v2 } from 'cloudinary';
-
 @Injectable()
 export class UploadService {
 	private timestamp = Math.round((new Date).getTime() / 1000);
@@ -23,16 +22,24 @@ export class UploadService {
 		});
 	}
 	async updateProfilePicture(props: any) {
+		console.log(await props.file);
+
 		const { createReadStream } = await props.file;
 		// const upload = await this.uploadStream( 
 		// 	{ createReadStream }
 		// );
 
 		// try {
+		console.log('uploading...');
+
 		const streamLoad = v2.uploader.upload_stream(
 			{ tags: 'haggleX_user_img' },
-			function (error, result) {
-				console.log(error, result);
+			async (error, result) => {
+				console.log(error, result.public_id);
+				if (result) {
+					console.log('done uploading...');
+
+				}
 			}
 			// (err, img) => {
 			// 	if (err) {
@@ -44,10 +51,8 @@ export class UploadService {
 			// 	}
 			// },
 		);
-		console.log('stream load : ', streamLoad);
-
-		await createReadStream().pipe(streamLoad);
-		return 'holla'
+		createReadStream().pipe(streamLoad);
+		return 'holla';
 		// } catch (error) {
 		// 	console.log(error);
 		// 	throw new BadGatewayException('error occured, please try again');
