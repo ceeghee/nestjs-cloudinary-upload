@@ -25,33 +25,44 @@ export class UploadService {
 		console.log(await props.file);
 
 		const { createReadStream, filename } = await props.file;
-		console.log('filename:', filename);
-
-		console.log(createReadStream);
-
-		// const upload = await this.uploadStream( 
-		// 	{ createReadStream }
-		// );
 
 		console.log('uploading...');
-		const streamLoad = v2.uploader.upload_stream(
-			{ tags: 'haggleX_user_img' },
-			function (error, result) {
-				console.log(error, result);
-				if (result) {
-					console.log('done uploading...');
-				}
-			}
-		);
+		let stream_up = () => {
+			return new Promise((resolve, reject) => {
+				let stream = v2.uploader.upload_stream(
+					(error, result) => {
+						if (result) {
+							resolve(result);
+						} else {
+							reject(error);
+						}
+					}
+				);
+
+				createReadStream().pipe(stream);
+			});
+		}
+
+		const result = await stream_up();
+		console.log(result);
+
+		// const streamLoad = v2.uploader.upload_stream(
+		// 	function (error, result) {
+		// 		// console.log(error, result);
+		// 		// if (result) {
+		// 		// 	console.log('done uploading...');
+		// 		// }
+		// 	}
+		// )
 		// const reader = createReadStream(filename, { encoding: 'binary' })
 		// reader.on('open', function () {
 		// 	console.log('stream open');
 		// 	reader.pipe(streamLoad)
 		// })
 
-		// reader.on('data', function () {
-		// 	console.log('stream has data');
-		// })
+		// // reader.on('data', function () {
+		// // 	console.log('stream has data');
+		// // })
 		// reader.on('error', function () {
 		// 	console.log('stream error');
 		// })
