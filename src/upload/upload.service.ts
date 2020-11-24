@@ -29,16 +29,14 @@ export class UploadService {
 		// 	{ createReadStream }
 		// );
 
-		// try {
 		console.log('uploading...');
 
 		const streamLoad = v2.uploader.upload_stream(
 			{ tags: 'haggleX_user_img' },
 			async (error, result) => {
-				console.log(error, result.public_id);
+				console.log(error, result);
 				if (result) {
 					console.log('done uploading...');
-
 				}
 			}
 			// (err, img) => {
@@ -51,12 +49,13 @@ export class UploadService {
 			// 	}
 			// },
 		);
-		createReadStream().pipe(streamLoad);
+		try {
+			createReadStream().pipe(streamLoad);
+		} catch (error) {
+			console.log('stream error', error);
+
+		}
 		return 'holla';
-		// } catch (error) {
-		// 	console.log(error);
-		// 	throw new BadGatewayException('error occured, please try again');
-		// }
 	}
 
 	async uploadStream(stream: any): Promise<any> {
