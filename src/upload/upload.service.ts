@@ -30,14 +30,14 @@ export class UploadService {
             if (result) {
               resolve(result);
             } else {
-              console.log(error, 'stream error');
+              // console.log(error, 'stream error');
               reject(error);
             }
           });
           // console.log(stream, 'stream');
           upload_stream().pipe(stream);
         } catch (error) {
-          console.log(error, 'catch error');
+          // console.log(error, 'catch error');
         }
       });
     };
