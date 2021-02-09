@@ -17,13 +17,14 @@ export class UploadService {
   async updateProfilePicture(props: any) {
     const { createReadStream, filename } = await props.file;
     const result = await this.uploadStream(createReadStream);
-    return result;
+    console.log(result);
+    return result.secure_url;
   }
 
   async uploadStream(upload_stream: any): Promise<any> {
-    let stream_up = () => {
+    const stream_up = () => {
       return new Promise((resolve, reject) => {
-        let stream = v2.uploader.upload_stream((error, result) => {
+        const stream = v2.uploader.upload_stream((error, result) => {
           if (result) {
             resolve(result);
           } else {
