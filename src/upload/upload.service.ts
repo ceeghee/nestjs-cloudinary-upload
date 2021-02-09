@@ -34,7 +34,7 @@ export class UploadService {
               reject(error);
             }
           });
-          console.log(stream, 'stream');
+          // console.log(stream, 'stream');
           upload_stream().pipe(stream);
         } catch (error) {
           console.log(error, 'catch error');
