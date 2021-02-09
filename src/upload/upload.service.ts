@@ -41,7 +41,6 @@ export class UploadService {
         }
       });
     };
-    console.log(stream_up, 'stream_up');
     return stream_up();
   }
 }
