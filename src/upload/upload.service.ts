@@ -24,16 +24,23 @@ export class UploadService {
   async uploadStream(upload_stream: any): Promise<any> {
     const stream_up = () => {
       return new Promise((resolve, reject) => {
-        const stream = v2.uploader.upload_stream((error, result) => {
-          if (result) {
-            resolve(result);
-          } else {
-            reject(error);
-          }
-        });
-        upload_stream().pipe(stream);
+        try {
+          const stream = v2.uploader.upload_stream((error, result) => {
+            if (result) {
+              resolve(result);
+            } else {
+              console.log(error, 'stream error');
+              reject(error);
+            }
+          });
+          console.log(stream, 'stream');
+          upload_stream().pipe(stream);
+        } catch (error) {
+          console.log(error, 'catch error');
+        }
       });
     };
+    console.log(stream_up, 'stream_up');
     return stream_up();
   }
 }
