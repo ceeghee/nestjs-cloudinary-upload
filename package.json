@@ -60,6 +60,10 @@
     "tsconfig-paths": "^3.9.0",
     "typescript": "^3.7.4"
   },
+	"resolutions": {
+    "**/**/fs-capacitor":"^6.2.0",
+    "**/graphql-upload": "^11.0.0"
+  },
   "jest": {
     "moduleFileExtensions": [
       "js",
@@ -73,9 +77,6 @@
     },
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
-  },
-	"resolutions": {
-    "**/**/fs-capacitor":"^6.2.0",
-    "**/graphql-upload": "^11.0.0"
   }
+	
 }
