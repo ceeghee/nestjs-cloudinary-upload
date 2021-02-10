@@ -66,10 +66,6 @@
       "json",
       "ts"
     ],
-		"resolutions": {
-			"**/**/fs-capacitor":"^5.0.0",
-			"**/graphql-upload": "^9.0.0"
-		},
     "rootDir": "src",
     "testRegex": ".spec.ts$",
     "transform": {
@@ -77,5 +73,9 @@
     },
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
+  },
+	"resolutions": {
+    "**/**/fs-capacitor":"^6.2.0",
+    "**/graphql-upload": "^11.0.0"
   }
 }
